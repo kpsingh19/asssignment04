@@ -1,17 +1,21 @@
 const fs = require("fs");
+const path = require('path');
+ 
+const postsFilePath = path.join(__dirname, 'data', 'posts.json');
+const categoriesFilePath = path.join(__dirname, 'data', 'categories.json');
 
 let posts = [];
 let categories = [];
 
 module.exports.initialize = function () {
     return new Promise((resolve, reject) => {
-        fs.readFile('./data/posts.json', 'utf8', (err, data) => {
+        fs.readFile(postsFilePath, 'utf8', (err, data) => {
             if (err) {
                 reject(err);
             } else {
                 posts = JSON.parse(data);
 
-                fs.readFile('./data/categories.json', 'utf8', (err, data) => {
+                fs.readFile(categoriesFilePath, 'utf8', (err, data) => {
                     if (err) {
                         reject(err);
                     } else {
